@@ -1,0 +1,26 @@
+body {
+    background: #002851;
+    color: #fefeff;
+    margin: 0;
+}
+
+.Hangman {
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Hangman-word {
+    font-size: 1.8em;
+    margin: .5em 0 .8em 0;
+}
+
+.strong {
+    font-weight: 800;
+}
+
+.btns p {
+    font-size: 1.2em;
+}
