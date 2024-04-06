@@ -49,12 +49,15 @@ class Hangman extends Component {
         const { key } = event;
         const { nbWrong, word, guessed } = this.state;
 
+
         if (nbWrong >= this.props.maxTries || word === '' || this.isGameOver() || !allowedKeys.includes(key.toLowerCase()) || guessed.has(key.toLowerCase())) {
             return; // Ignore les touches non autorisées, les touches déjà devinées, ou si le jeu est fini
         }
 
         this.handleGuess(key.toLowerCase()); // Appeler handleGuess avec la lettre devinée
         this.setState({ activeKey: key.toLowerCase() }); // Mettre à jour la touche active
+
+        setTimeout(() => this.setState({ activeKey: '' }), 500);
     }
 
     isGameOver = () => {
@@ -78,6 +81,7 @@ class Hangman extends Component {
             .split('') // Diviser le mot en lettres
             .map(ltr => (guessed.has(ltr) ? ltr : '_')) // Remplacer les lettres non devinées par des tirets
             .join(' '); // Rejoindre les lettres avec des espaces
+
     }
 
     handleGuess = (ltr) => {
@@ -95,6 +99,7 @@ class Hangman extends Component {
         fetchWord(lang)
             .then(word => {
                 this.setState({ word }); // Mettre à jour l'état avec le nouveau mot
+
             })
             .catch(err => {
                 console.log(err);
@@ -127,7 +132,7 @@ class Hangman extends Component {
         return (
             <div className="Hangman">
                 <h1>Jeu du pendu</h1>
-                <img src={this.props.images[nbWrong]} alt={`${nbWrong}/${maxTries}`} />
+                <img src={this.props.images[nbWrong]} alt={"Nombre d'erreur avant de perdre :" + nbWrong + "/" + maxTries} />
                 <div className="btns">
                     {gameState}
                 </div>
